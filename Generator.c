@@ -9,13 +9,15 @@ int main()
     int n;     // total values of n
     int a = 1; // use for rand
     int dim; // dimensions
-
+    int range; //the range of values
     srand(time(NULL));
 
     printf("\n Choose the amount of elements you wish to cluster:");
     scanf("%d", &n);
     printf("\n Choose the amount of dimensions:");
     scanf("%d", &dim);
+    printf("\n Choose the range of n values:" );
+    scanf("%d",&range);
 
     double **GenerateValues; // Array of values n
     GenerateValues = calloc(n, sizeof(double));
@@ -27,11 +29,12 @@ int main()
             GenerateValues[i][d] = i + 1;
 
     FILE *Generator;
-    Generator = fopen("DataLinear.txt", "w"); // Write because it is a generator obv
+    Generator = fopen("DataLinear.csv", "w"); // Write because it is a generator obv
     for (i = 0; i < n; i++){
         for (d = 0; d < dim; d++){
         fprintf(Generator, "%lf", GenerateValues[i][d]);
-        fprintf(Generator," ");
+       if(d < dim-1)
+        fprintf(Generator,",");
       }
         fprintf(Generator,"\n");
       }
@@ -48,15 +51,16 @@ int main()
 
     for (i = 0; i < n; i++)
         for (d = 0; d < dim; d++)
-        GenerateRandomValues[i][d] = ((rand() % (n - a + 1)) + a);
+        GenerateRandomValues[i][d] = ((rand() % (range - a + 1)) + a);
 
     FILE *Generator2;
-    Generator2 = fopen("DataRandom.txt", "w"); // Write because it is a generator obv
+    Generator2 = fopen("DataRandom.csv", "w"); // Write because it is a generator obv
     for (i = 0; i < n; i++)
     {
       for (d = 0; d < dim; d++){
             fprintf(Generator2, "%lf", GenerateRandomValues[i][d]);
-            fprintf(Generator2, " ");
+            if(d < dim-1)
+            fprintf(Generator2, ",");
           }
           fprintf(Generator2, "\n");
 }
