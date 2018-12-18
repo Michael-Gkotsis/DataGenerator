@@ -34,7 +34,7 @@ int main()
         for (d = 0; d < dim; d++){
         fprintf(Generator, "%lf", GenerateValues[i][d]);
        if(d < dim-1)
-        fprintf(Generator,",");
+        fprintf(Generator,", ");
       }
         fprintf(Generator,"\n");
       }
@@ -60,7 +60,7 @@ int main()
       for (d = 0; d < dim; d++){
             fprintf(Generator2, "%lf", GenerateRandomValues[i][d]);
             if(d < dim-1)
-            fprintf(Generator2, ",");
+            fprintf(Generator2, ", ");
           }
           fprintf(Generator2, "\n");
 }
