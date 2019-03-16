@@ -42,6 +42,8 @@ int main()
 
 
     fclose(Generator);
+    for(i = 0; i < n; i++)
+    free(GenerateValues[i]);
     free(GenerateValues);
 
     double **GenerateRandomValues; // Array of Random values n
@@ -66,6 +68,8 @@ int main()
 }
 
     fclose(Generator2);
+ for(i = 0; i < n; i++)
+    free(GenerateRandomValues[i]);
     free(GenerateRandomValues);
 
     return 0;
