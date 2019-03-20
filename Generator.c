@@ -19,21 +19,22 @@ int main()
     printf("\n Choose the range of n values:" );
     scanf("%d",&range);
 
-    double **GenerateValues; // Array of values n
-    GenerateValues = calloc(n, sizeof(double));
-    for (d = 0; d < n; d++)
-        GenerateValues[d] = calloc(dim, sizeof(double *));
+    float *GenerateValues; // Array of values n
+    GenerateValues =(float *) calloc(n*dim, sizeof(float));
 
-    for (i = 0; i < n; i++)
-        for (d = 0; d < dim; d++)
-            GenerateValues[i][d] = i + 1;
+
+    for (i = n; i--;)
+        for (d = dim; d--;)
+            GenerateValues[i*dim + d] = i + 1;
 
     FILE *Generator;
     Generator = fopen("DataLinear.csv", "w"); // Write because it is a generator obv
-    for (i = 0; i < n; i++){
-        for (d = 0; d < dim; d++){
-        fprintf(Generator, "%lf", GenerateValues[i][d]);
-       if(d < dim-1)
+    for (i = n; i--;)
+    {
+        for (d = dim; d--;)
+        {
+        fprintf(Generator, "%lf", GenerateValues[i*dim + d]);
+       if(d > 0)
         fprintf(Generator,", ");
       }
         fprintf(Generator,"\n");
@@ -42,36 +43,29 @@ int main()
 
 
     fclose(Generator);
-    for(i = 0; i < n; i++)
-    free(GenerateValues[i]);
     free(GenerateValues);
 
-    double **GenerateRandomValues; // Array of Random values n
-    GenerateRandomValues = calloc(n, sizeof(double));
-    for (d = 0; d < n; d++)
-        GenerateRandomValues[d] = calloc(dim, sizeof(double *));
+    float *GenerateRandomValues; // Array of Random values n
+    GenerateRandomValues =(float *) calloc(n*dim, sizeof(float));
 
-    for (i = 0; i < n; i++)
-        for (d = 0; d < dim; d++)
-        GenerateRandomValues[i][d] = ((rand() % (range - a + 1)) + a);
+
+    for (i = n; i--;)
+        for (d = dim; d--;)
+        GenerateRandomValues[i*dim + d] = ((rand() % (range - a + 1)) + a);
 
     FILE *Generator2;
     Generator2 = fopen("DataRandom.csv", "w"); // Write because it is a generator obv
-    for (i = 0; i < n; i++)
+    for (i = n; i--;)
     {
-      for (d = 0; d < dim; d++){
-            fprintf(Generator2, "%lf", GenerateRandomValues[i][d]);
-            if(d < dim-1)
-            fprintf(Generator2, ", ");
+      for (d = dim; d--; ){
+            fprintf(Generator2, "%lf ", GenerateRandomValues[i*dim + d]);
+
           }
           fprintf(Generator2, "\n");
 }
 
     fclose(Generator2);
- for(i = 0; i < n; i++)
-    free(GenerateRandomValues[i]);
     free(GenerateRandomValues);
 
     return 0;
 }
-
